@@ -1,0 +1,86 @@
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    text-align: center;
+    color: #fff;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    background-color: rgba(90,92,105,.5);
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 10px;
+
+}
+
+#myBtn:hover {
+  background-color: #8B8C91;
+}
+
+.tuythich{
+    margin-top: 10px;
+}
+
+.shareeeee{
+    margin:0 0 2em;
+    padding:30px 30px 20px;
+    border:1px solid #f6f6f6;
+    border-radius:0;
+    font-weight: bold;
+
+}
+
+.after-entry{
+    border-top:1px solid #f6f6f6;
+    /*margin-top:20px;*/
+    margin:0 0 1em;
+
+    padding:30px;
+}
+
+.button_share {
+    padding: 4px 8px !important;
+    color: #fff !important;
+    font-size: 12px;
+    border-radius: 2px;
+    margin-right: 2px;
+    cursor: pointer;
+    margin-top: 2px;
+    display: inline-block;
+    text-decoration: none;
+    /*background-color: #005a87;*/
+
+
+}
+.iconcolor{
+    color: #fff;
+}
+.facebook{
+    background-color: #0B6D9D;
+}
+.facebook:hover {
+    background-color: #004E75;
+}
+.gplus {
+ background-color: #dd4b39;
+}
+.gplus:hover {
+    background-color: #9C3224;
+}
+
+.pinterest {
+ background-color: #cc2127;
+}
+.pinterest:hover {
+    background-color: #A51A1E;
+}
+.linkedin {
+ background-color: #0077b5;
+}
+.linkedin:hover {
+    background-color: #005C8E;
+}
