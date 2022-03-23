@@ -53,7 +53,7 @@ class admincontroller extends Controller
 
     public function getIndexAdminDash(Request $req){
     	if (Auth::check() && Auth::user()->level == 1) {
-
+            
             $url_canonical = $req->url();
             // $user_ip_address = '192.168.1.42';
 
@@ -85,7 +85,7 @@ class admincontroller extends Controller
     		return redirect()->route('trang-chu');
     }
 
-
+  
 
 /*-----------------------------------------------User--------------------------------------------------------------------*/
     public function getQL_NguoiDung(Request $req){
@@ -98,12 +98,12 @@ class admincontroller extends Controller
         else{
             return redirect()->route('trang-chu');
         }
-
+        
     }
 
     public function getQL_NguoiDung_user(Request $req){
         if (Auth::check() && Auth::user()->level == 1) {
-
+            
             $taikhoan_user = User::where('level',2)->get();
             $url_canonical = $req->url();
 
@@ -112,11 +112,11 @@ class admincontroller extends Controller
         else{
             return redirect()->route('trang-chu');
         }
-
+        
     }
     public function getQL_NguoiDung_ad(Request $req){
         if (Auth::check() && Auth::user()->level == 1) {
-
+            
             $taikhoan_ad = User::where('level',1)->get();
             $url_canonical = $req->url();
 
@@ -125,7 +125,7 @@ class admincontroller extends Controller
         else{
             return redirect()->route('trang-chu');
         }
-
+        
     }
 
     public function DelAdmin($id)
@@ -178,17 +178,17 @@ class admincontroller extends Controller
         $user->address = $req->adress;
         $user->level = $req->level;
         $user->save();
-        return redirect()->back()->with('thongbao', 'Thêm mới thành công!');
+        return redirect()->back()->with('thongbao', 'Thêm mới thành công!'); 
     }
 
 
-
+    
     public function postUpdateAdmin(Request $req,$id){
         if(Session::get('locale') == 'vi' || Session::get('locale') == null){
             $this->validate($req,
             [
                 'email'=>'required|email',
-
+                
                 'name'=>'required',
 
             ],
@@ -203,7 +203,7 @@ class admincontroller extends Controller
             $this->validate($req,
             [
                 'email'=>'required|email',
-
+                
                 'name'=>'required',
 
             ]);
@@ -239,13 +239,13 @@ class admincontroller extends Controller
             $slide = Slide::all();
             // $slide = Slide::where('status_slide',0)->get();
             $url_canonical = $req->url();
-
+        
 
 
             return view('admin.QL_slide', compact('slide', 'url_canonical'));
         }else{
             return redirect()->route('trang-chu');
-
+            
         }
     }
 
@@ -295,7 +295,7 @@ class admincontroller extends Controller
         if ($req->hasFile('image_file')) {
             $file = $req->file('image_file');
             $get_name_img = $file->getClientOriginalName();
-            $name_img = current(explode('.', $get_name_img));
+            $name_img = current(explode('.', $get_name_img));  
             $new_img = $name_img.rand(0,99).'.'.$file->getClientOriginalExtension();
             $filename =time() .'.'. $new_img;
             $file->move('public/source/image/slide/', $filename);
@@ -305,7 +305,7 @@ class admincontroller extends Controller
             $slide->image = '';
         }
         $slide->status_slide = $req=0;
-
+        
 
         $slide->save();
         return redirect()->back()->with('thongbao', 'Thêm mới thành công!');
@@ -321,21 +321,21 @@ class admincontroller extends Controller
 
             if($req->hasFile('image')){
                 if(Session::get('locale') == 'vi' || Session::get('locale') == null){
-                    $this->validate($req,
+                    $this->validate($req, 
                     [
-
+                        
                         'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
-                    ],
+                    ],          
                     [
-
+                        
                         // 'image.required' => 'Vui lòng chọn hình',
                         'image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                         'image.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
                     ]);
                 }else{
-                    $this->validate($req,
+                    $this->validate($req, 
                     [
-
+                        
                         'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
                     ]);
                 }
@@ -351,7 +351,7 @@ class admincontroller extends Controller
                 if ($req->hasFile('image')) {
                     $file = $req->file('image');
                     $get_name_img = $file->getClientOriginalName();
-                    $name_img = current(explode('.', $get_name_img));
+                    $name_img = current(explode('.', $get_name_img));  
                     $new_img = $name_img.rand(0,99).'.'.$file->getClientOriginalExtension();
                     $filename =time() .'.'. $new_img;
                     $file->move('public/source/image/slide/', $filename);
@@ -370,7 +370,7 @@ class admincontroller extends Controller
         }else{
             return redirect()->route('trang-chu');
         }
-
+        
     }
 
     public function active_slide($id){
@@ -396,7 +396,6 @@ class admincontroller extends Controller
 
     public function DelAdmin_NSX($id, Request $req)
     {
-
         $image = ProductType::where('id', $id)->first();
         $sp1 = Product::where('id_type', $image->id)->get();
         if(empty($sp1[0])){
@@ -428,7 +427,7 @@ class admincontroller extends Controller
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                 'image_file.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
 
-
+            
             ]);
         }else{
             $this->validate($req,
@@ -443,7 +442,7 @@ class admincontroller extends Controller
         if ($req->hasFile('image_file')) {
             $file = $req->file('image_file');
             $get_name_img = $file->getClientOriginalName();
-            $name_img = current(explode('.', $get_name_img));
+            $name_img = current(explode('.', $get_name_img));  
             $new_img = $name_img.rand(0,99).'.'.$file->getClientOriginalExtension();
             $filename =time() .'.'. $new_img;
             $file->move('public/source/image/type_product/', $filename);
@@ -452,10 +451,10 @@ class admincontroller extends Controller
             return $req;
             $nsx->image = '';
         }
-
+        
 
         $nsx->save();
-        return redirect()->route('quanlynsx')->with('thongbao', 'Thêm mới thành công!');
+        return redirect()->route('quanlynsx')->with('thongbao', 'Thêm mới thành công!'); 
     }
 
 
@@ -497,7 +496,7 @@ class admincontroller extends Controller
             if ($req->hasFile('image')) {
                 $file = $req->file('image');
                 $get_name_img = $file->getClientOriginalName();
-                $name_img = current(explode('.', $get_name_img));
+                $name_img = current(explode('.', $get_name_img));  
                 $new_img = $name_img.rand(0,99).'.'.$file->getClientOriginalExtension();
                 $filename =time() .'.'. $new_img;
                 $file->move('public/source/image/type_product/', $filename);
@@ -514,7 +513,7 @@ class admincontroller extends Controller
 
         $nsx_update->save();
 
-        return redirect()->route('quanlynsx')->with('thongbao', 'Cập nhật thành công!');
+        return redirect()->route('quanlynsx')->with('thongbao', 'Cập nhật thành công!'); 
 
 
     }
@@ -531,14 +530,14 @@ class admincontroller extends Controller
 
 
             $sanpham1 = DB::select("SELECT sp.id,sp.sub_image, sp.product_soid ,sp.id_type, type_products.name_type as loai,
-                sp.product_quantity,sp.unit_price,sp.hours_sale,sp.date_sale, sp.promotion_price,sp.image,sp.new,sp.id_post, post.sp_vi as sp_vi,  post.sp_en as sp_en, post.description_en as description_en, post.description_vi as description_vi, post.product_slug
+                sp.product_quantity,sp.unit_price,sp.hours_sale,sp.date_sale, sp.promotion_price,sp.image,sp.new,sp.id_post, post.sp_vi as sp_vi,  post.sp_en as sp_en, post.description_en as description_en, post.description_vi as description_vi, post.product_slug 
                         FROM products as sp
                         INNER JOIN type_products ON sp.id_type = type_products.id
                         INNER JOIN post ON sp.id_post = post.id_post");
 
             $nameproduct = Post::orderby('id_post', 'asc')->get();
             $type = ProductType::orderby('id', 'desc')->get();
-
+      
 
             return view('admin.QL_sanpham', compact('sanpham','sanpham1', 'type', 'nameproduct','url_canonical'));
 
@@ -600,7 +599,7 @@ class admincontroller extends Controller
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                 'image_file.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
 
-
+            
             ]);
         }else{
             $this->validate($req,
@@ -639,7 +638,7 @@ class admincontroller extends Controller
 
             $file = $req->file('image_file');
             $get_name_img = $file->getClientOriginalName();
-            $name_img = current(explode('.', $get_name_img));
+            $name_img = current(explode('.', $get_name_img));  
             $new_img = $name_img.rand(0,99).'.'.$file->getClientOriginalExtension();
             $filename =time() .'.'. $new_img;
             $file->move('public/source/image/product/', $filename);
@@ -683,7 +682,7 @@ class admincontroller extends Controller
                     'image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                     'image.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
 
-
+                
                 ]);
             }else{
                 $this->validate($req,
@@ -724,7 +723,7 @@ class admincontroller extends Controller
 
                     $file = $req->file('image');
                     $get_name_img = $file->getClientOriginalName();
-                    $name_img = current(explode('.', $get_name_img));
+                    $name_img = current(explode('.', $get_name_img));  
                     $new_img = $name_img.rand(0,99).'.'.$file->getClientOriginalExtension();
                     $filename =time() .'.'. $new_img;
                     $file->move('public/source/image/product/', $filename);
@@ -754,7 +753,7 @@ class admincontroller extends Controller
     }
 
 /*-----------------------------------------------Đơn-Hàng----------------------------------------------------------------*/
-
+    
     public function getDonHang(Request $req)
     {
         if (Auth::check()) {
@@ -762,7 +761,7 @@ class admincontroller extends Controller
 
             $donhang = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->orderby('id_bill', 'DESC')->get();
             $url_canonical = $req->url();
-
+           
 
             return view('admin.QL_donhang', compact('donhang','url_canonical'));
 
@@ -774,10 +773,10 @@ class admincontroller extends Controller
     public function getDonHang_daduyet(Request $req)
     {
         if (Auth::check()) {
-
+            
             $donhang_daduyet = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill',1)->orderby('id_bill', 'desc')->get();
             $url_canonical = $req->url();
-
+           
 
             return view('admin.QL_donhang_daduyet', compact('donhang_daduyet','url_canonical'));
 
@@ -789,10 +788,10 @@ class admincontroller extends Controller
     public function getDonHang_chuaduyet(Request $req)
     {
         if (Auth::check()) {
-
+            
             $donhang_chuaduyet = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill',0)->orderby('id_bill', 'desc')->get();
             $url_canonical = $req->url();
-
+           
 
             return view('admin.QL_donhang_chuaduyet', compact('donhang_chuaduyet', 'url_canonical'));
 
@@ -804,10 +803,10 @@ class admincontroller extends Controller
     public function getDonHang_huy(Request $req)
     {
         if (Auth::check()) {
-
+            
             $donhang_huy = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill',2)->orderby('id_bill', 'desc')->get();
             $url_canonical = $req->url();
-
+           
 
             return view('admin.QL_donhang_huy', compact('donhang_huy','url_canonical'));
 
@@ -827,7 +826,7 @@ class admincontroller extends Controller
 
         $billdetail = BillDetail::where('id_bill', $bill->id_bill)->delete();
 
-
+        
         Bill::where('id_bill',$id)->delete();
 
         return redirect()->back()->with('thongbao', 'Xóa thành công!');
@@ -881,7 +880,7 @@ class admincontroller extends Controller
         $order_date  = $bill->date_order;
         $statistic = Statistical::where('order_date',$order_date)->get();
         if($statistic){
-            $statistic_count = $statistic->count();
+            $statistic_count = $statistic->count(); 
         }else{
             $statistic_count = 0;
         }
@@ -927,7 +926,7 @@ class admincontroller extends Controller
                 $statistic_update->save();
 
             }else{
-
+                
                 $statistic_new = new Statistical();
                 $statistic_new->order_date = $order_date;
                 $statistic_new->sales = $sales;
@@ -963,10 +962,10 @@ class admincontroller extends Controller
         return $pdf->stream();
     }
     public function print_order_convert($checkout_code){
-
+        
         $billdetaill_print = BillDetail::where('order_code',$checkout_code)->join('post', 'post.id_post', 'bill_detail.id_post_bill_detail')->get();
         $bill_print = Bill::where('order_code',$checkout_code)->get();
-
+ 
         foreach($billdetaill_print as $key => $bd){
             $namepro = $bd->sp_vi;
         }
@@ -1085,7 +1084,7 @@ class admincontroller extends Controller
 
     }
 
-
+ 
 
 
 
@@ -1096,7 +1095,7 @@ class admincontroller extends Controller
             $ngonngu = Post::all();
             $url_canonical = $req->url();
 
-
+            
             return view('admin.QL_post', compact('ngonngu','url_canonical'));
         }else{
             return redirect()->route('trang-chu');
@@ -1115,7 +1114,7 @@ class admincontroller extends Controller
                 'sp_vi.required'=>'Vui lòng nhập vi',
                 'sp_en.required'=>'Vui lòng nhập en',
 
-
+            
             ]);
         }else{
             $this->validate($req,
@@ -1133,7 +1132,7 @@ class admincontroller extends Controller
         $addnn->product_slug  = $req->slug;
 
         $addnn->save();
-        return redirect()->route('quanlynn')->with('thongbao', 'Thêm mới thành công');
+        return redirect()->route('quanlynn')->with('thongbao', 'Thêm mới thành công'); 
     }
 
     public function DelAdmin_NN($id)
@@ -1193,10 +1192,10 @@ class admincontroller extends Controller
 
         foreach ($get as $key => $val) {
             $chart_data[] = array(
-                'period' => $val->order_date,
-                'order' => $val->total_order,
-                'sales' => $val->sales,
-                'profit' => $val->profit,
+                'period' => $val->order_date, 
+                'order' => $val->total_order, 
+                'sales' => $val->sales, 
+                'profit' => $val->profit, 
                 'quantity' => $val->quantity
             );
         }
@@ -1232,10 +1231,10 @@ class admincontroller extends Controller
 
         foreach ($get as $key => $val) {
             $chart_data[] = array(
-                'period' => $val->order_date,
-                'order' => $val->total_order,
-                'sales' => $val->sales,
-                'profit' => $val->profit,
+                'period' => $val->order_date, 
+                'order' => $val->total_order, 
+                'sales' => $val->sales, 
+                'profit' => $val->profit, 
                 'quantity' => $val->quantity
             );
         }
@@ -1251,10 +1250,10 @@ class admincontroller extends Controller
 
         foreach ($get as $key => $val) {
             $chart_data[] = array(
-                'period' => $val->order_date,
-                'order' => $val->total_order,
-                'sales' => $val->sales,
-                'profit' => $val->profit,
+                'period' => $val->order_date, 
+                'order' => $val->total_order, 
+                'sales' => $val->sales, 
+                'profit' => $val->profit, 
                 'quantity' => $val->quantity
             );
         }
@@ -1270,7 +1269,7 @@ class admincontroller extends Controller
             $day_now = Carbon::now('Asia/Ho_Chi_Minh')->day;
             $year_now = Carbon::now('Asia/Ho_Chi_Minh')->year;
 
-
+            
             $coupon = Coupon::orderBy('coupon_id', 'desc')->get();
             $today =  Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
             $coupon_send_new = Coupon::where('coupon_status', 0)->where('coupon_date_end', '>=', $today)->first();
@@ -1300,7 +1299,7 @@ class admincontroller extends Controller
                 'coupon_number.required'=>'Vui lòng nhập coupon_number',
                 'coupon_code.required'=>'Vui lòng nhập coupon_code',
                 'coupon_code.unique'=>'coupon_code đã tồn tại',
-
+            
             ]);
         }else{
             $this->validate($req,
@@ -1322,11 +1321,11 @@ class admincontroller extends Controller
         $addcoupon->coupon_status  = $req=0;
 
         $addcoupon->save();
-        return redirect()->route('quanlycoupon')->with('thongbao', 'Thêm mới thành công!');
+        return redirect()->route('quanlycoupon')->with('thongbao', 'Thêm mới thành công!'); 
     }
 
     public function DelAdmin_Coupon($id)
-    {
+    {   
         $delcoupon = Coupon::where('coupon_id', $id)->delete();
 
 
@@ -1350,7 +1349,7 @@ class admincontroller extends Controller
                     'coupon_number.required'=>'Vui lòng nhập coupon_number',
                     'coupon_code.required'=>'Vui lòng nhập coupon_code',
                     // 'coupon_code.unique'=>'coupon_code đã tồn tại',
-
+                
                 ]);
             }else{
                 $this->validate($req,
@@ -1392,7 +1391,7 @@ class admincontroller extends Controller
             $data['email'][] = $send->email;
         }
         $coupon_array =  array(
-            'coupon_send_new' => $coupon_send_new,
+            'coupon_send_new' => $coupon_send_new, 
         );
 
         Mail::send('email.send_mail_coupon', ['coupon_array'=>$coupon_array]  ,function($message) use ($title_mail, $data, $to_email){
@@ -1443,7 +1442,7 @@ class admincontroller extends Controller
 
         }else{
             $resuft_tb = trans('home_ad.importexcel', [], 'en');
-        }
+        }        
         $file = $req->file('file')->getRealPath();
         $import = new ImportPost;
         $import->import($file);
@@ -1510,7 +1509,7 @@ class admincontroller extends Controller
     // }
 
 
-    //don hang
+    //don hang 
     public function export_excel_dh(){
         return Excel::download(new ExportOrder , 'Order.xlsx');
     }

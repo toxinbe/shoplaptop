@@ -39,6 +39,7 @@
                                 <tr>
                                     <th class="product-thumbnail">{{ trans('home.hinhanh') }}</th>
                                     <th class="product-name">{{ trans('home.producttt') }}</th>
+                                    <th class="product-name">{{ trans('home.type') }}</th>
                                     <th class="product-price">{{ trans('home.gia') }}</th>
                                     <th class="product-quantity">{{ trans('home.qty') }}</th>
                                     <th class="product-subtotal">{{ trans('home.status') }}</th>
@@ -53,9 +54,8 @@
                                         <a href="#"><img src="source/image/product/{{$cart['item']['image']}}" alt="cart-image" height="101.6px" width="101.6px" /></a>
                                     </td>
                                     <td class="product-name"><a href="#">{{$cart['item']->$multisp}}</a></td>
-                                    <td class="product-name">
-                                        {{$cart['item']->$multisp}}
-                                    </td>
+                                    <td class="product-name"><?php $loaisanpham = App\Models\ProductType::where('id', $cart['item']['id_type'])->get();?>
+                                        {{$loaisanpham['0']['name_type']}}</td>
                                     <td class="product-price">
                                     	<span class="amount">
 											@if($cart['item']['promotion_price']==0)
