@@ -7,3 +7,4 @@ laravel version 8.13.0 (https://laravel.com/docs/8.x/installation)
 
 bước 1. import database vào phpmyadmin: shoplaptop.sql
 bước 2. giải nén project bỏ vào thư mục localhost (htdocs của xampp / www của wamp)
+xx
