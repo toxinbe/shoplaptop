@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th3 22, 2022 lúc 02:42 PM
--- Phiên bản máy phục vụ: 5.7.36
--- Phiên bản PHP: 8.0.13
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jan 18, 2025 at 10:43 AM
+-- Server version: 9.1.0
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,30 +18,30 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `shoplaptop`
+-- Database: `shoplaptop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bills`
+-- Table structure for table `bills`
 --
 
 DROP TABLE IF EXISTS `bills`;
 CREATE TABLE IF NOT EXISTS `bills` (
-  `id_bill` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_customer` int(10) UNSIGNED NOT NULL,
+  `id_bill` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_customer` int UNSIGNED NOT NULL,
   `date_order` date DEFAULT NULL,
   `order_code` varchar(50) NOT NULL,
   `total` float DEFAULT NULL COMMENT 'tổng tiền',
-  `payment` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'hình thức thanh toán',
-  `status_bill` int(10) NOT NULL,
+  `payment` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT 'hình thức thanh toán',
+  `status_bill` int NOT NULL,
   PRIMARY KEY (`id_bill`),
   KEY `bills_ibfk_1` (`id_customer`)
 ) ENGINE=MyISAM AUTO_INCREMENT=174 DEFAULT CHARSET=latin1;
 
 --
--- Đang đổ dữ liệu cho bảng `bills`
+-- Dumping data for table `bills`
 --
 
 INSERT INTO `bills` (`id_bill`, `id_customer`, `date_order`, `order_code`, `total`, `payment`, `status_bill`) VALUES
@@ -50,17 +50,17 @@ INSERT INTO `bills` (`id_bill`, `id_customer`, `date_order`, `order_code`, `tota
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bill_detail`
+-- Table structure for table `bill_detail`
 --
 
 DROP TABLE IF EXISTS `bill_detail`;
 CREATE TABLE IF NOT EXISTS `bill_detail` (
-  `id_bill_detail` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_bill` int(10) UNSIGNED NOT NULL,
-  `id_post_bill_detail` int(10) NOT NULL,
-  `id_product` int(10) UNSIGNED NOT NULL,
+  `id_bill_detail` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_bill` int UNSIGNED NOT NULL,
+  `id_post_bill_detail` int NOT NULL,
+  `id_product` int UNSIGNED NOT NULL,
   `order_code` varchar(50) NOT NULL,
-  `quantity` int(10) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
   `unit_price` float DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `bill_detail` (
 ) ENGINE=MyISAM AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
 
 --
--- Đang đổ dữ liệu cho bảng `bill_detail`
+-- Dumping data for table `bill_detail`
 --
 
 INSERT INTO `bill_detail` (`id_bill_detail`, `id_bill`, `id_post_bill_detail`, `id_product`, `order_code`, `quantity`, `unit_price`, `created_at`, `updated_at`) VALUES
@@ -80,46 +80,46 @@ INSERT INTO `bill_detail` (`id_bill_detail`, `id_bill`, `id_post_bill_detail`, `
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `coupon`
+-- Table structure for table `coupon`
 --
 
 DROP TABLE IF EXISTS `coupon`;
 CREATE TABLE IF NOT EXISTS `coupon` (
-  `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
+  `coupon_id` int NOT NULL AUTO_INCREMENT,
   `coupon_name` varchar(255) NOT NULL,
-  `coupon_qty` int(50) NOT NULL,
-  `coupon_number` int(11) NOT NULL,
+  `coupon_qty` int NOT NULL,
+  `coupon_number` int NOT NULL,
   `coupon_code` varchar(50) NOT NULL,
-  `coupon_condition` int(11) NOT NULL,
+  `coupon_condition` int NOT NULL,
   `coupon_date_start` varchar(50) NOT NULL,
   `coupon_date_end` varchar(50) NOT NULL,
-  `coupon_status` int(10) NOT NULL,
+  `coupon_status` int NOT NULL,
   `coupon_used` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`coupon_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `customer`
+-- Table structure for table `customer`
 --
 
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE IF NOT EXISTS `customer` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `gender` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `phone_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `note` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `gender` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `phone_number` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `note` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=187 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=187 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `customer`
+-- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`id`, `name`, `gender`, `email`, `address`, `phone_number`, `note`, `created_at`, `updated_at`) VALUES
@@ -128,41 +128,41 @@ INSERT INTO `customer` (`id`, `name`, `gender`, `email`, `address`, `phone_numbe
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `payments`
+-- Table structure for table `payments`
 --
 
 DROP TABLE IF EXISTS `payments`;
 CREATE TABLE IF NOT EXISTS `payments` (
-  `id_payment` int(10) NOT NULL AUTO_INCREMENT,
-  `id_post_payment` int(10) NOT NULL,
-  `id_customer` int(10) UNSIGNED NOT NULL,
+  `id_payment` int NOT NULL AUTO_INCREMENT,
+  `id_post_payment` int NOT NULL,
+  `id_customer` int UNSIGNED NOT NULL,
   `order_code` varchar(255) NOT NULL,
   `code_bank` varchar(255) NOT NULL,
   `time` varchar(255) NOT NULL,
   PRIMARY KEY (`id_payment`),
   KEY `id_customer` (`id_customer`,`id_post_payment`),
   KEY `id_post_payment` (`id_post_payment`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `post`
+-- Table structure for table `post`
 --
 
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
-  `id_post` int(10) NOT NULL AUTO_INCREMENT,
+  `id_post` int NOT NULL AUTO_INCREMENT,
   `sp_vi` varchar(255) NOT NULL,
   `sp_en` varchar(255) NOT NULL,
   `description_vi` text,
   `description_en` text,
   `product_slug` varchar(255) NOT NULL,
   PRIMARY KEY (`id_post`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `post`
+-- Dumping data for table `post`
 --
 
 INSERT INTO `post` (`id_post`, `sp_vi`, `sp_en`, `description_vi`, `description_en`, `product_slug`) VALUES
@@ -194,32 +194,32 @@ INSERT INTO `post` (`id_post`, `sp_vi`, `sp_en`, `description_vi`, `description_
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `products`
 --
 
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_type` int(10) UNSIGNED NOT NULL,
-  `id_post` int(10) NOT NULL,
-  `product_quantity` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `product_soid` int(11) NOT NULL,
-  `unit_price` int(100) NOT NULL,
-  `promotion_price` int(100) NOT NULL,
-  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `sub_image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `new` tinyint(4) NOT NULL DEFAULT '0',
-  `date_sale` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `hours_sale` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_type` int UNSIGNED NOT NULL,
+  `id_post` int NOT NULL,
+  `product_quantity` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `product_soid` int NOT NULL,
+  `unit_price` int NOT NULL,
+  `promotion_price` int NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `sub_image` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `new` tinyint NOT NULL DEFAULT '0',
+  `date_sale` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `hours_sale` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_type` (`id_type`),
   KEY `zazaza` (`id_post`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `id_type`, `id_post`, `product_quantity`, `product_soid`, `unit_price`, `promotion_price`, `image`, `sub_image`, `new`, `date_sale`, `hours_sale`, `created_at`, `updated_at`) VALUES
@@ -239,20 +239,20 @@ INSERT INTO `products` (`id`, `id_type`, `id_post`, `product_quantity`, `product
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `rating`
+-- Table structure for table `rating`
 --
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE IF NOT EXISTS `rating` (
-  `rating_id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_id` int(10) UNSIGNED NOT NULL,
-  `rating_number` int(11) NOT NULL,
+  `rating_id` int NOT NULL AUTO_INCREMENT,
+  `product_id` int UNSIGNED NOT NULL,
+  `rating_number` int NOT NULL,
   PRIMARY KEY (`rating_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `rating`
+-- Dumping data for table `rating`
 --
 
 INSERT INTO `rating` (`rating_id`, `product_id`, `rating_number`) VALUES
@@ -272,20 +272,20 @@ INSERT INTO `rating` (`rating_id`, `product_id`, `rating_number`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `slide`
+-- Table structure for table `slide`
 --
 
 DROP TABLE IF EXISTS `slide`;
 CREATE TABLE IF NOT EXISTS `slide` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `link` varchar(255) DEFAULT NULL,
   `image` varchar(100) NOT NULL,
-  `status_slide` int(10) NOT NULL,
+  `status_slide` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
 
 --
--- Đang đổ dữ liệu cho bảng `slide`
+-- Dumping data for table `slide`
 --
 
 INSERT INTO `slide` (`id`, `link`, `image`, `status_slide`) VALUES
@@ -300,38 +300,38 @@ INSERT INTO `slide` (`id`, `link`, `image`, `status_slide`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `social`
+-- Table structure for table `social`
 --
 
 DROP TABLE IF EXISTS `social`;
 CREATE TABLE IF NOT EXISTS `social` (
-  `social_id` int(10) NOT NULL AUTO_INCREMENT,
+  `social_id` int NOT NULL AUTO_INCREMENT,
   `provider_user_id` varchar(255) NOT NULL,
   `provider` varchar(255) NOT NULL,
-  `user` int(10) UNSIGNED NOT NULL,
+  `user` int UNSIGNED NOT NULL,
   PRIMARY KEY (`social_id`),
   KEY `user` (`user`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `statistical`
+-- Table structure for table `statistical`
 --
 
 DROP TABLE IF EXISTS `statistical`;
 CREATE TABLE IF NOT EXISTS `statistical` (
-  `id_statistic` int(11) NOT NULL AUTO_INCREMENT,
+  `id_statistic` int NOT NULL AUTO_INCREMENT,
   `order_date` varchar(255) NOT NULL,
   `sales` varchar(255) NOT NULL,
   `profit` varchar(255) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total_order` int(11) NOT NULL,
+  `quantity` int NOT NULL,
+  `total_order` int NOT NULL,
   PRIMARY KEY (`id_statistic`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `statistical`
+-- Dumping data for table `statistical`
 --
 
 INSERT INTO `statistical` (`id_statistic`, `order_date`, `sales`, `profit`, `quantity`, `total_order`) VALUES
@@ -355,19 +355,19 @@ INSERT INTO `statistical` (`id_statistic`, `order_date`, `sales`, `profit`, `qua
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `type_products`
+-- Table structure for table `type_products`
 --
 
 DROP TABLE IF EXISTS `type_products`;
 CREATE TABLE IF NOT EXISTS `type_products` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name_type` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name_type` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `type_products`
+-- Dumping data for table `type_products`
 --
 
 INSERT INTO `type_products` (`id`, `name_type`, `image`) VALUES
@@ -382,50 +382,50 @@ INSERT INTO `type_products` (`id`, `name_type`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `user_token` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `level` int(11) NOT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `user_token` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `level` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `phone`, `address`, `user_token`, `remember_token`, `level`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '$2y$10$JAOJihKYDwzmgWL.psvJXepGnrkQPbSS51L2zwGKGPmgUtTN8j5/2', '0123456789', 'tp.HCM', NULL, NULL, 1, NULL, NULL),
+(1, 'Admin', 'admin@gmail.com', '$2y$10$vNXM.9DrRohdYQsE3bZ5nuOEtIVXG0MjcvvaOcJuYf/iCrhkM0bBe', '0123456789', 'tp.HCM', NULL, NULL, 1, NULL, '2025-01-18 10:23:02'),
 (37, 'tu dinh ngu', 'dsadsa123@gmail.com', '$2y$10$AeWD76o8T8wv4qqyGfuMHubeF8/x5qto8rAjfhbFpzHpTgfwZY1HK', '0123', 'dsadsa', NULL, NULL, 2, '2022-03-21 04:10:46', '2022-03-21 04:10:46');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `visitors`
+-- Table structure for table `visitors`
 --
 
 DROP TABLE IF EXISTS `visitors`;
 CREATE TABLE IF NOT EXISTS `visitors` (
-  `id_visitors` int(11) NOT NULL AUTO_INCREMENT,
+  `id_visitors` int NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(255) NOT NULL,
   `date_visitor` varchar(255) NOT NULL,
   PRIMARY KEY (`id_visitors`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `visitors`
+-- Dumping data for table `visitors`
 --
 
 INSERT INTO `visitors` (`id_visitors`, `ip_address`, `date_visitor`) VALUES
@@ -435,30 +435,30 @@ INSERT INTO `visitors` (`id_visitors`, `ip_address`, `date_visitor`) VALUES
 (4, '127.0.0.1', '2021-05-12');
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `payments`
+-- Constraints for table `payments`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`id_post_payment`) REFERENCES `post` (`id_post`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_type`) REFERENCES `type_products` (`id`),
   ADD CONSTRAINT `zazaza` FOREIGN KEY (`id_post`) REFERENCES `post` (`id_post`);
 
 --
--- Các ràng buộc cho bảng `rating`
+-- Constraints for table `rating`
 --
 ALTER TABLE `rating`
   ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `social`
+-- Constraints for table `social`
 --
 ALTER TABLE `social`
   ADD CONSTRAINT `social_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
