@@ -1,10 +1,13 @@
     <!-- SEO -->
-    <link  rel="canonical" content="{{$url_canonical}}" />
+    <!-- <link  rel="canonical" content="{{$url_canonical}}" /> -->
+    <link  rel="canonical" content="{{ url('/') }}" />
     <meta property="og:image" content="{{$image_og}}" />
     <meta name="author" content="ShopPv">
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="{{$url_canonical}}" />
-    <meta property="og:url"content="{{$url_canonical}}" />
+    <!-- <meta property="og:site_name" content="{{$url_canonical}}" />
+    <meta property="og:url"content="{{$url_canonical}}" /> -->
+    <meta property="og:site_name" content="{{ url('/') }}" />
+    <meta property="og:url" content="{{ url('/') }}" />
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
