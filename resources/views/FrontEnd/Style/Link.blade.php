@@ -1,7 +1,7 @@
     <!-- SEO -->
     <!-- <link  rel="canonical" content="{{$url_canonical}}" /> -->
     <link  rel="canonical" content="{{ url('/') }}" />
-    <meta property="og:image" content="{{$image_og}}" />
+    <!-- <meta property="og:image" content="{{$image_og}}" /> -->
     <meta name="author" content="ShopPv">
     <meta property="og:type" content="website" />
     <!-- <meta property="og:site_name" content="{{$url_canonical}}" />
